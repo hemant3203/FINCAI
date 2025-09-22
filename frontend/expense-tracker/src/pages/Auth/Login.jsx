@@ -1,18 +1,21 @@
 import React from 'react'
-import AuthLayout from '../../components/layouts/AuthLayout'
-import {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
-import Input from '../../components/Inputs/Input'
-import {Link} from 'react-router-dom'
-import {validateEmail} from '../../utils/helper'
-import { API_PATH } from '../../utils/apiPaths'
-import axiosInstance from '../../utils/axiosInstance'
+import AuthLayout from '../../components/layouts/AuthLayout';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import Input from '../../components/Inputs/Input';
+import {Link} from 'react-router-dom';
+import {validateEmail} from '../../utils/helper';
+import { API_PATH } from '../../utils/apiPaths';
+import axiosInstance from '../../utils/axiosInstance';
+import {UserContext} from '../../context/UserContext';
 
 const Login = () => {
 
   const [email,SetEmail]=useState("");
   const [password,SetPassword]=useState("");
   const [error,setError]=useState(null);
+
+  const{updateUser}=useContext(UserContext);
 
   const navigate=useNavigate();
 
@@ -43,6 +46,7 @@ const Login = () => {
 
       if(token){
         localStorage.setItem("token",token);
+        updateUser(user);
         navigate("/dashboard");
       }
     }
