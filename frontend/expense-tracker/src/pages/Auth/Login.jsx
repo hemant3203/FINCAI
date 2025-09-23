@@ -8,6 +8,7 @@ import {validateEmail} from '../../utils/helper';
 import { API_PATH } from '../../utils/apiPaths';
 import axiosInstance from '../../utils/axiosInstance';
 import {UserContext} from '../../context/UserContext';
+import { useContext } from 'react'
 
 const Login = () => {
 
@@ -97,4 +98,6 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login;
+
+

@@ -1,11 +1,19 @@
 import React,{createContext,useState} from 'react';
 
-export const UserProvider=({children})=>{
+export const UserContext=createContext();
+
+
+
+const UserProvider=({children})=>{
    const [user,setUser]=useState(null);
 
 //    function to update user data
 const updateUser=(userData)=>{
-    setUser(null);
+    setUser(userData);
+};
+
+const clearUser=()=>{
+   setUser(null);
 };
 
 return (

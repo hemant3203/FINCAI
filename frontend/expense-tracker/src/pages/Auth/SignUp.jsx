@@ -49,9 +49,6 @@ const SignUp = () => {
 
     //Signup API call
 
-  
-
-
     try{
 
       // upload image if present
