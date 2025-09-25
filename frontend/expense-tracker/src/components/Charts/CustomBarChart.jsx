@@ -41,7 +41,7 @@ const CustomTooltip=({active,payload})=>{
            <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 30 }}>
                 <CartesianGrid stroke="none"/>
 
-                <XAxis dataKey="category" tick={{fontSize:12,fill:"#a555"}} stroke="none"/>
+                <XAxis dataKey="month" tick={{fontSize:12,fill:"#a555"}} stroke="none"/>
                 <YAxis tick={{fontSize:12 ,fill:"#555"}} stroke="none"/>
 
                 <Tooltip content={CustomTooltip}/>
