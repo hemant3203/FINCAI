@@ -14,6 +14,7 @@ const TransactionInfoCard = ({
     amount,       
      type,      
      hideDeleteBtn,
+     onDelete
 }) => { 
 
     const getAmountStyles=()=>
