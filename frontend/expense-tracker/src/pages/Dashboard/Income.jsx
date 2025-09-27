@@ -8,8 +8,10 @@ import AddIncomeForm from '../../components/Income/AddIncomeForm';
 import { ToastContainer, toast } from 'react-toastify';
 import IncomeList from '../../components/Income/IncomeList';
 import DeleteAlert from '../../components/DeleteAlert';
+import { useUserAuth } from '../../hooks/useUserAuth';
 
 const Income = () => {
+  useUserAuth();
 
   const [incomeData,setIncomeData]=useState([]);
   const [loading,setLoading]=useState(false);
@@ -156,6 +158,7 @@ useEffect(() => {
         </Modal>
 
       </div>
+      <ToastContainer position='top-right' autoClose={2500}/>
     </DashboardLayout>
   )
 }
