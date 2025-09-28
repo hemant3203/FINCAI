@@ -20,7 +20,7 @@ const Income = () => {
     data:null,
   });
 
-  const [OpenAddIncomeModal,setOpenAddIncomeModal]=useState(true)
+  const [OpenAddIncomeModal,setOpenAddIncomeModal]=useState(false)
 
 // Get all income Details
 const fetchIncomeDetails=async()=>{
