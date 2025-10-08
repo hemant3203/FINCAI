@@ -7,6 +7,8 @@ import ExpenseOverview from '../../components/Expense/ExpenseOverview'
 import Modal from '../../components/Modal'
 import AddExpenseForm from '../../components/Expense/AddExpenseForm'
 import { toast } from 'react-hot-toast';
+import ExpenseList from '../../components/Expense/ExpenseList'
+import DeleteAlert from '../../components/DeleteAlert'
 
 
 
@@ -35,7 +37,7 @@ const Expense = () => {
    );
 
    if(response.data){
-    setExpenseData(response.data);
+    setExpenseData(response.data.expense||[]);
    }
   } catch(error){
     console.log("Something Went wrong.Please try again,",error)
@@ -126,7 +128,7 @@ useEffect(() => {
           </div>
 
           <ExpenseList
-          transaction={expenseData}
+          transactions={expenseData}
           onDelete={(id)=>{
             setOpenDeleteAlert({show:true,data:id});
           }}
@@ -144,6 +146,17 @@ useEffect(() => {
       >
         <AddExpenseForm onAddExpense={handleAddExpense}/>
       </Modal>
+
+      <Modal
+       isOpen={openDeleteAlert.show}
+       onClose={()=> setOpenDeleteAlert({show:false,data:null})}
+       title="Delete Expense"
+       >
+        <DeleteAlert
+        content="Are You sure want to delete this Expense details?"
+        onDelete={()=> deleteExpense(openDeleteAlert.data)}
+        />
+        </Modal>
 
 
       </div>

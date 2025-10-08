@@ -8,7 +8,7 @@ const ExpenseOverview = ({transactions,onExpenseIncome}) => {
     const [chartData,setChartData]=useState([]);
 
     useEffect(()=>{
-        const result=prepareExpenseLineChartData(transactions.expense);
+        const result=prepareExpenseLineChartData(transactions);
         setChartData(result);
 
         return()=>{};
