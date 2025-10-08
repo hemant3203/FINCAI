@@ -4,6 +4,11 @@ import DashboardLayout from '../../components/layouts/DashboardLayout'
 import { API_PATH } from '../../utils/apiPaths'
 import axiosInstance from '../../utils/axiosInstance'
 import ExpenseOverview from '../../components/Expense/ExpenseOverview'
+import Modal from '../../components/Modal'
+import AddExpenseForm from '../../components/Expense/AddExpenseForm'
+import { toast } from 'react-hot-toast';
+
+
 
 const Expense = () => {
   useUserAuth();
@@ -40,8 +45,8 @@ const Expense = () => {
 };
 
 // Handle Add Expense
-const handleAddIncome=async(expense)=>{
-  const {category,amount,date,icon}=income;
+const handleAddExpense=async(expense)=>{
+  const {category,amount,date,icon}=expense;
 
   // Validation Checks
   if(!category.trim()){
@@ -81,6 +86,27 @@ const handleAddIncome=async(expense)=>{
 };
 
 
+// delete Expense
+const deleteExpense=async(id)=>{
+try{
+  await axiosInstance.delete(API_PATH.EXPENSE.DELETE_EXPENSE(id));
+
+  setOpenDeleteAlert({show:false,data:null});
+  toast.success("Expense details deleted Successfully");
+  fetchExpenseDetails();
+}
+catch(error){
+  console.error(
+    "Error deleting Expense:",
+    error.response?.data?.message|| error.message
+  );
+}
+};
+
+// handle to download expense details
+const handleDownloadExpenseDetails=async()=>{};
+
+
 useEffect(() => {
   fetchExpenseDetails()
 
@@ -98,11 +124,28 @@ useEffect(() => {
           onExpenseIncome={()=> setOpenAddExpenseModal(true)}
           />
           </div>
+
+          <ExpenseList
+          transaction={expenseData}
+          onDelete={(id)=>{
+            setOpenDeleteAlert({show:true,data:id});
+          }}
+
+          onDownload={handleDownloadExpenseDetails}
+          />
+
+
         </div>
 
+      <Modal
+      isOpen={OpenAddExpenseModal}
+      onClose={()=>setOpenAddExpenseModal(false)}
+      title="Add Expense"
+      >
+        <AddExpenseForm onAddExpense={handleAddExpense}/>
+      </Modal>
 
 
-        
       </div>
     </DashboardLayout>
   )
